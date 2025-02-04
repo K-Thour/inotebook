@@ -18,7 +18,7 @@ function App() {
     <div className="bg-dark">
     <LoadingBar height={3} color="yellow" progress={path.progress} onLoaderFinished={()=>path.setProgress(0)} />
     {path.location.pathname==="/"||path.location.pathname==="/about"?<Navbar/>:""}
-      <Alert Alert={{result:"Welcome",message:"user"}}/>
+      <Alert Alert={path.alert}/>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />

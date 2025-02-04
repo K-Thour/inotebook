@@ -17,6 +17,7 @@ function Home() {
     notes.setProgress(10);
     notes.getNotes();
     notes.setProgress(100);
+    notes.showAlert("success","Notes fetched");
   },[])
   return (
     <div

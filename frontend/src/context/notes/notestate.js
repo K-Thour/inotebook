@@ -5,12 +5,19 @@ const NoteState = (props) => {
   let location = useLocation();
   const navigate = useNavigate();
   const [Id, setId] = useState();
-  const [progress,setProgress]=useState(0);
+  const [progress, setProgress] = useState(0);
   const [reason, setReason] = useState();
-  let auth="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNjc5Zjc0MmQ2YTdjOTYwYzUyODMxZDk1IiwiaWF0IjoxNzM4NTEzMjk0fQ.PmUMAz02MgxLedWTqpuA17SlfhYRx2XTG5_gKbJw3Zo";
+  const [alert, setAlert] = useState(null);
+  let auth =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNjc5Zjc0MmQ2YTdjOTYwYzUyODMxZDk1IiwiaWF0IjoxNzM4NTEzMjk0fQ.PmUMAz02MgxLedWTqpuA17SlfhYRx2XTG5_gKbJw3Zo";
   const [note, setnote] = useState([]);
   const host = "http://localhost:4000";
-  
+  const showAlert = (type, message) => {
+    setAlert({ type, message });
+    setTimeout(() => {
+      setAlert(null);
+    }, 2000);
+  };
   // function to get notes
   const getNotes = async () => {
     try {
@@ -107,7 +114,9 @@ const NoteState = (props) => {
         auth,
         reason,
         progress,
-        setProgress
+        setProgress,
+        alert,
+        showAlert,
       }}
     >
       {props.children}
