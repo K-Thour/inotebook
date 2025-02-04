@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Avestan&family=Poppins:wght@100&family=Roboto+Mono:wght@100&display=swap');
+:root{
+    --white:#ffffff;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'noto sans avestan',sans-serif;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
+section{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width:100%;
+    /* margin-top: -40px; */
+    background: url(./images/wallpaperflare.com_wallpaper\(1\).jpg) no-repeat center;
+    background-size: cover;
+}
+.form-box{
+    position:reletive;
+    width:400px;
+    height:450px;
+    background: transparent;
+    border: 2px solid gray;
+    border-radius: 3% ;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+h2{
+    font-size: 2em;
+    color:var(--white);
+    text-align: center;
+}
+.inputbox{
+    position: relative;
+    margin: 30px 0;
+    width:310px;
+    border-bottom: 2px solid var(--white);
+}
+.inputbox label{
+    position:absolute;
+    top:50%;
+    left:5px;
+    transform: translatey(-50%);
+    color:var(--white);
+    font-size: 1em;
+    pointer-events: none;
+    transition: .5s;
+}
+input:focus ~ label,
+input:valid ~ label{
+    top:-5px;
+}
+.inputbox input{
+    width: 100%;
+    height:50px;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    padding: 35px 0 5px;
+    color:var(--white);
+}
+.icon{
+    position:absolute;
+    position:absolute;
+    right:8px;
+    top:23px;
+    font-size:1.2em;
+    font-size:1.2em;
+    color: var(--white);
+}
+.forget{
+    margin: -25px 0 15px;
+    font-size:.9em;
+    color: var(--white);
+    display: grid;
+}
+.forget label input{
+    margin-right: 3px;
+}
+.forget a{
+    color: var(--white);
+    text-decoration: none;
+    text-align: center;
+    margin-top: 10px ;
+}
+.forget a:hover{
+    text-decoration: underline;
+}
+button{
+    width:100%;
+    height:40px;
+    border-radius: 40px;
+    cursor: pointer;
+    outline: none;
+    font-size:1em;
+    font-weight: 600;
+}
+.register{
+    font-size: .9em;
+    color:var(--white);
+    text-align: center;
+    margin-top: 25px 0 10px 0;
+}
+.register p a{
+    text-decoration: none;
+    color: var(--white);
+    font-weight: 600;
+}
+.register a:hover{
+    text-decoration: underline;
+}
+.register p{
+    margin-top: 12px;
+}
+.card{
+    border:2px solid var(--white)
+}
+.card:hover{
+    border:none;
+    box-shadow: 0 2px 2px 0 var(--white);
+}
+.view{
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+.section{
+    background: url(./images/wallpaperflare.com_wallpaper\(1\).jpg) no-repeat center;
+    background-size: cover;
+}
+/* Custom CSS for smaller screens */
+@media (max-width: 768px) {
+    .card-title {
+      font-size: 1.2rem !important; /* Adjust font size for smaller screens */
+    }
+    .card-text {
+      font-size: 0.9rem !important;
+    }
+    .btn {
+      padding: 0.25rem 0.5rem !important; /* Adjust button padding for smaller screens */
+    }
+  }
