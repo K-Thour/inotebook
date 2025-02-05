@@ -28,10 +28,10 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(200).json({ success, errors: errors.array() });
     }
-
+    const email=new RegExp(req.body.email,"i");
     try {
       // Check whether the user with this email already exists
-      const existingUser = await User.findOne({ email: req.body.email });
+      const existingUser = await User.findOne({ email: email });
 
       if (existingUser) {
         // If the user exists, send an error response

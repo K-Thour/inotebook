@@ -22,7 +22,7 @@ function Home() {
     notes.getuser();
     notes.getNotes()
     }
-  },[])
+  },[notes.auth])
   return (
     <div
       className="d-flex flex-column section list"

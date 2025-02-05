@@ -6,7 +6,6 @@ const NoteState = (props) => {
   const navigate = useNavigate();
   const [Id, setId] = useState();
   const [progress, setProgress] = useState(0);
-  const [reason, setReason] = useState();
   const [alert, setAlert] = useState(null);
   const [auth, setAuth] = useState(false);
   const [note, setnote] = useState([ ]);
@@ -41,11 +40,11 @@ const NoteState = (props) => {
       }
       const json = await response.json();
       if (json.success) {
-        showAlert("warning", "User registered successfully");
+        showAlert("success", "User registered successfully");
         setAuth(json.authtoken);
         navigate("/");
       } else {
-        showAlert("success", json.message);
+        showAlert("warning", json.message);
       }
     } catch (error) {
       console.error(error);
@@ -92,7 +91,6 @@ const NoteState = (props) => {
         },
       });
       if (!response.ok) {
-        // showAlert("danger", "Unable to get a user");
         throw new Error(`Response status: ${response.status}`);
       }
       const json=await response.json();
@@ -103,7 +101,6 @@ const NoteState = (props) => {
       setUser(newuser);
     } catch (error) {
       console.error(error);
-      // showAlert("danger", error.message);
     }
   }
 
@@ -126,7 +123,6 @@ const NoteState = (props) => {
       setProgress(70);
       const json = await response.json();
       setnote(json);
-      // showAlert("success","Notes fetched");
       setProgress(100);
     } catch (error) {
       showAlert("danger", "Internal server error");
@@ -147,7 +143,6 @@ const NoteState = (props) => {
         showAlert("danger", "Unable to get notes");
         throw new Error(`Response status: ${response.status}`);
       }
-      const json = await response.json();
       getNotes();
       showAlert("success", "Note added successfully");
     } catch (error) {
@@ -189,7 +184,6 @@ const NoteState = (props) => {
         },
       });
       if (!response.ok) {
-        showAlert("Danger", "Unable to delete the note");
         throw new Error(`Response status: ${response.status}`);
       }
       getNotes();
@@ -197,7 +191,6 @@ const NoteState = (props) => {
       navigate("/");
     } catch (error) {
       console.error(error.message);
-      showAlert("Danger", "Internal server error");
     }
   };
   return (
@@ -213,7 +206,6 @@ const NoteState = (props) => {
         deleteNote,
         auth,
         setAuth,
-        reason,
         progress,
         setProgress,
         alert,

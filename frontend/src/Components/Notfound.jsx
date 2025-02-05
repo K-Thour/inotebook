@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom'; // for navigation back to home or other pages
-
 const NotFound = () => {
   return (
     <div style={styles.container}>

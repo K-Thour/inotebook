@@ -29,10 +29,10 @@ function Update() {
   };
 
   // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     notes.setProgress(10);
     e.preventDefault();
-    notes.updateNote(note._id, title, description, tag);
+    await notes.updateNote(note._id, title, description, tag);
     notes.setProgress(100);
     navigate("/");
   };
