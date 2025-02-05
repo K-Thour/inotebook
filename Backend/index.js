@@ -1,8 +1,9 @@
 const express = require('express');
+require("dotenv").config();
 const connectToMongo=require('./Mongoose');
 const app = express();
 const cors=require('cors');
-const mongoURI = "mongodb+srv://Karanveer:Thour@inotebook.j4dvz.mongodb.net/?retryWrites=true&w=majority&appName=inotebook";
+const mongoURI = process.env.url;
 const port = 4000;
 // Connect to MongoDB
 connectToMongo(mongoURI);
