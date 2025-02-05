@@ -9,7 +9,7 @@ function Login() {
   const [type, setType] = useState("password");
   const handleSubmit = async (e) => {
     e.preventDefault();
-    data.Login(email, pass);
+    data.Login({email,password:pass});
   };
   const showPass = (e) => {
     type === "password" ? setType("text") : setType("password");

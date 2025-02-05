@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link, useNavigate, NavLink } from "react-router-dom";
 import NoteContext from "../context/notes/notecontext";
 function Home() {
@@ -15,14 +15,12 @@ function Home() {
   }
   useEffect(()=>{
     notes.setProgress(10);
-    notes.getNotes();
-    notes.setProgress(100);
-    notes.showAlert("success","Notes fetched");
+    notes.getNotes()
   },[])
   return (
     <div
       className="d-flex flex-column section list"
-      style={{ height: "98vh", width: "99vw", overflow: "hidden" }}
+      style={{ minHeight:"100vh",height: "100%", width: "99vw", overflow: "hidden" }}
     >
       <div className="d-flex flex-row vw-100 align-items-center">
         <div style={{ width: "95%" }}>

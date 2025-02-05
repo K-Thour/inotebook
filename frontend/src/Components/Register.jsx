@@ -9,7 +9,7 @@ function Register() {
   const [type,setType]=useState("password");
   const handleSubmit=(e)=>{
     e.preventDefault();
-    console.log(name,email,pass);
+    data.register(name,email,pass);
   }
   const showPass=(e)=>{
     type==="password"?setType("text"):setType("password");

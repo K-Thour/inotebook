@@ -14,9 +14,63 @@ const NoteState = (props) => {
   const host = "http://localhost:4000";
   const showAlert = (type, message) => {
     setAlert({ type, message });
-    setTimeout(() => {
-      setAlert(null);
-    }, 2000);
+    if (type === "success") {
+      setTimeout(() => {
+        setAlert(null);
+      }, 3000);
+    }
+  };
+  // function to register
+
+  const register=async(name,email,password)=>{
+    console.log(name);
+    try {
+      const response = await fetch(`${host}/inotebook/user/create`, {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify( name,email, password ),
+      });
+      if (!response.ok) {
+        showAlert("danger", "Unable to register");
+        throw new Error(`Response status: ${response.status}`);
+      } 
+      const json=await response.json();
+      console.log(json);
+      showAlert("Success","user registered successfully");
+    } catch (error) {
+        console.error(error);
+        showAlert("danger",error.message );
+      }
+  }
+
+  // function to log in
+  const Login = async (email, password) => {
+    try {
+      const response = await fetch(`${host}/inotebook/user/login`, {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify( email, password ),
+      });
+      if (!response.ok) {
+        showAlert("danger", "Unable to Login");
+        throw new Error(`Response status: ${response.status}`);
+      }
+      const json = await response.json();
+      if(json.success){
+        auth=json.authtoken;
+        showAlert("success", "User Login successfully");
+        navigate("/");
+      }else{
+        showAlert("warning",json.reason)
+      }
+    } catch (error) {
+      console.error(error);
+      showAlert("danger",error.message );
+    }
   };
   // function to get notes
   const getNotes = async () => {
@@ -31,14 +85,16 @@ const NoteState = (props) => {
       });
       setProgress(50);
       if (!response.ok) {
+        showAlert("danger", "Unable to fetch notes");
         throw new Error(`Response status: ${response.status}`);
       }
       setProgress(70);
       const json = await response.json();
       setnote(json);
-      setProgress(90);
+      // showAlert("success","Notes fetched");
+      setProgress(100);
     } catch (error) {
-      console.error(error.message);
+      showAlert("danger", "Internal server error");
     }
   };
   // function to add note in database
@@ -53,12 +109,15 @@ const NoteState = (props) => {
         body: JSON.stringify({ title, description, tag }),
       });
       if (!response.ok) {
+        showAlert("danger", "Unable to get notes");
         throw new Error(`Response status: ${response.status}`);
       }
       const json = await response.json();
       console.log(json);
+      showAlert("success", "Note added successfully");
     } catch (error) {
       console.error(error.message);
+      showAlert("danger", "Internal server error");
     }
   };
 
@@ -74,10 +133,13 @@ const NoteState = (props) => {
         body: JSON.stringify({ title, description, tag }),
       });
       if (!response.ok) {
+        showAlert("Danger", "Unable to add the note");
         throw new Error(`Response status: ${response.status}`);
       }
+      showAlert("success", "note updated successfully");
     } catch (error) {
       console.error(error.message);
+      showAlert("Danger", "Internal server error");
     }
   }; //pending
 
@@ -92,12 +154,15 @@ const NoteState = (props) => {
         },
       });
       if (!response.ok) {
+        showAlert("Danger", "Unable to delete the note");
         throw new Error(`Response status: ${response.status}`);
       }
       getNotes();
+      showAlert("success", "note deleted successfully");
       navigate("/");
     } catch (error) {
       console.error(error.message);
+      showAlert("Danger", "Internal server error");
     }
   };
   return (
@@ -117,6 +182,8 @@ const NoteState = (props) => {
         setProgress,
         alert,
         showAlert,
+        Login,
+        register
       }}
     >
       {props.children}

@@ -2,7 +2,7 @@ const express = require('express');
 const connectToMongo=require('./Mongoose');
 const app = express();
 const cors=require('cors');
-const mongoURI = 'mongodb://0.0.0.0:27017/inotebook';
+const mongoURI = "mongodb+srv://Karanveer:Thour@inotebook.j4dvz.mongodb.net/?retryWrites=true&w=majority&appName=inotebook";
 const port = 4000;
 // Connect to MongoDB
 connectToMongo(mongoURI);

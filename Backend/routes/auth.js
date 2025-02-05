@@ -5,7 +5,7 @@ const { body, validationResult } = require("express-validator");
 const bycrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const JWT_SECRET = "Inotebook$madeby@Thour&it'sformakingnotes";
-//Route 1: Create a User using: POST "/api/auth/create". No login required
+//Route 1: Create a User using: POST "/inotebook/user/create". No login required
 router.post(
   "/create",
   // Express-Validator checking everything is okay
@@ -20,12 +20,13 @@ router.post(
   // If there are errors, return Bad request and the errors
   async (req, res) => {
     let success = false;
+    console.log(req.body);
     const errors = validationResult(req);
     const salt = await bycrypt.genSalt(10);
     req.body.password = await bycrypt.hash(req.body.password, salt);
 
     if (!errors.isEmpty()) {
-      return res.status(400).json({ success, errors: errors.array() });
+      return res.status(200).json({ success, errors: errors.array() });
     }
 
     try {
@@ -45,7 +46,7 @@ router.post(
           res.send({ success: true, authtoken });
         })
         .catch((err) => {
-          res.status(400).send({ success, response: err.errorResponse.errmsg });
+          res.status(200).send({ success, response: err.errorResponse.errmsg });
           console.log({ success, response: err.errorResponse.errmsg });
         });
 
@@ -74,7 +75,8 @@ router.post(
       return res.status(400).json({ success,errors: errors.array() });
     }
     // Check whether the user with this email exists already
-    const user = await User.findOne({ email: req.body.email });
+    const email=new RegExp(req.body.email,"i");
+    const user = await User.findOne({ email: email });
     if (!user) {
       return res.status(200).send({success,reason:"Invalid Credentials"});
     }
