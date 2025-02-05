@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 // import Alerts from "./Alerts";
 import NoteContext from "../context/notes/notecontext";
 function Login() {
@@ -9,7 +9,7 @@ function Login() {
   const [type, setType] = useState("password");
   const handleSubmit = async (e) => {
     e.preventDefault();
-    data.Login({email,password:pass});
+    await data.Login({email,password:pass});
   };
   const showPass = (e) => {
     type === "password" ? setType("text") : setType("password");

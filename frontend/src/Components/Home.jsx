@@ -14,21 +14,27 @@ function Home() {
     navigate("/");
   }
   useEffect(()=>{
+    if(!notes.auth){
+      notes.showAlert("warning","Please Login");
+      navigate("/login");
+    }else{
     notes.setProgress(10);
+    notes.getuser();
     notes.getNotes()
+    }
   },[])
   return (
     <div
       className="d-flex flex-column section list"
-      style={{ minHeight:"100vh",height: "100%", width: "99vw", overflow: "hidden" }}
+      style={{ minHeight:"100vh",height: "100%", width: "100vw", overflow: "hidden" }}
     >
       <div className="d-flex flex-row vw-100 align-items-center">
         <div style={{ width: "95%" }}>
-          <h3 className="text-center mt-3 text-white">Your Notes</h3>
+          <h3 className="text-center mt-3 text-white ms-5">Your Notes</h3>
         </div>
         <div className="me-4" id="add" style={{ width: "5%",marginRight:"100px" }} onClick={handleClick}>
           <Link to="/add">
-            <button id="add" className="text-white" onClick={handleClick} style={{ background: "transparent", fontSize: "25px" ,width:"6vw",padding:"5px 10px 0 0"}}>
+            <button id="add" className="text-white me-5 mt-2" onClick={handleClick} style={{ background: "transparent", fontSize: "25px" ,width:"4vw",padding:"5px 10px 0 0"}}>
               <ion-icon name="add-outline"></ion-icon>
             </button>
           </Link>
@@ -63,9 +69,9 @@ function Home() {
                   backgroundColor: "transparent",
                 }}
               >
-                <div className="d-flex justify-content-between">
+                <div className="d-flex justify-content-between ">
                   <div>
-                    <p className="card-text mt-2 ms-2 text-white" style={{ color: "grey" }}>
+                    <p className="card-text mt-2 ms-2 text-white tag overlap" style={{ color: "grey" }}>
                       #{note.tag}
                     </p>
                   </div>
@@ -100,13 +106,13 @@ function Home() {
                 </div>
                 <div className="card-body d-flex flex-column justify-content-center mb-5">
                   <h1
-                    className="card-title text-white"
-                    style={{ textAlign: "center", textWrap: "wrap" }}
+                    className="card-title text-white overlap"
+                    style={{ textAlign: "center", textWrap: "wrap",height:"20%" }}
                   >
                     {note.title}
                   </h1>
-                  <p
-                    className="card-text mt-1 text-white"
+                  <pre
+                    className="card-text mt-1 text-white overlap"
                     style={{
                       textAlign: "center",
                       fontSize: ".9rem",
@@ -115,7 +121,7 @@ function Home() {
                     }}
                   >
                     {note.description}
-                  </p>
+                  </pre>
                 </div>
               </div>
             </NavLink>

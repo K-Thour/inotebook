@@ -12,8 +12,10 @@ import LoadingBar from "react-top-loading-bar";
 import "./app.css";
 import NoteContext from "./context/notes/notecontext";
 import Alert from "./Components/Alerts";
+import NotFound from "./Components/Notfound";
 function App() {
   let path=useContext(NoteContext);
+  const navigate=useNavigate();
   return (
     <div className="bg-dark">
     <LoadingBar height={3} color="yellow" progress={path.progress} onLoaderFinished={()=>path.setProgress(0)} />
@@ -27,6 +29,7 @@ function App() {
           <Route path="/add" element={<AddNote/>}/>
           <Route path="/register" element={<Register />} />
           <Route path="/about" element={<About />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
     </div>
   );

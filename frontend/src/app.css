@@ -2,7 +2,6 @@
 :root{
     --white:#ffffff;
 }
-
 *{
     margin: 0;
     padding: 0;
@@ -13,6 +12,9 @@
     margin: 0;
     padding: 0;
 }
+body{
+    overflow: hidden;
+}
 section{
     display:flex;
     justify-content: center;
@@ -20,15 +22,13 @@ section{
     min-height: 100vh;
     width:100%;
     /* margin-top: -40px; */
-    background: url(./images/wallpaperflare.com_wallpaper\(1\).jpg) no-repeat center;
-    background-size: cover;
 }
 .form-box{
     position:reletive;
     width:400px;
     height:450px;
     background: transparent;
-    border: 2px solid gray;
+    border: 2px solid var(--white);
     border-radius: 3% ;
     display: flex;
     align-items: center;
@@ -135,8 +135,27 @@ button{
     justify-content: flex-start;
 }
 .section{
-    background: url(./images/wallpaperflare.com_wallpaper\(1\).jpg) no-repeat center;
+    background: url(./images/pexels-isabella-mendes-107313-2440970.jpg) no-repeat center;
     background-size: cover;
+}
+.tag{
+    width:250px;
+    height:30px;
+}
+hr{
+    background: var(--white);
+    color: var(--white);
+}
+.overlap{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+input{
+    color: white;
+}
+input::placeholder{
+    color: white;
 }
 /* Custom CSS for smaller screens */
 @media (max-width: 768px) {

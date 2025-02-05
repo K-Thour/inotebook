@@ -56,7 +56,7 @@ function Update() {
       style={{ backgroundColor: "#1a1a1a", color: "white" }}
     >
       {/* Header Section */}
-      <div className="row align-items-center p-3 border-bottom border-secondary">
+      <div className="row align-items-center p-3 border-bottom" style={{borderBottom:"2px solid white"}}>
         <div className="col-2 col-md-1 text-start">
           <Link to="/" className="text-white">
             <button className="btn btn-transparent p-0" aria-label="Go back">
@@ -74,8 +74,9 @@ function Update() {
             placeholder="Enter your title here"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
+            maxLength={30}
             required
-            style={{ outline: "none", boxShadow: "none" }}
+            style={{ outline: "none", boxShadow: "none" ,border:"2px solid white"}}
           />
         </div>
         <div className="col-2 col-md-1 text-end">
@@ -99,11 +100,12 @@ function Update() {
         <div className="col-12">
           <input
             type="text"
-            className="form-control bg-transparent text-white fs-4 border-secondary"
+            className="form-control bg-transparent text-white fs-4"
             placeholder="Enter your tags here"
             value={tag}
+            maxLength={70}
             onChange={(e) => setTag(e.target.value)}
-            style={{ width: "100%", padding: "10px" }}
+            style={{ width: "100%", padding: "10px" ,border:"2px solid white"}}
           />
         </div>
       </div>
@@ -113,7 +115,7 @@ function Update() {
         <div className="col-12 h-100">
           <textarea
             required
-            className="form-control bg-transparent text-white fs-4 border-secondary"
+            className="form-control bg-transparent text-white fs-4"
             placeholder="Enter your text here"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -122,6 +124,7 @@ function Update() {
               minHeight: "60vh",
               resize: "none",
               padding: "10px",
+              border:"2px solid white"
             }}
           ></textarea>
         </div>

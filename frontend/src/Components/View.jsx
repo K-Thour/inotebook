@@ -18,14 +18,17 @@ function View() {
       </div>
     );
   }
-  const deleteNote=(e)=>{
-    notes.deleteNote(e.target);
+  const deleteNote=async(e)=>{
+    e.stopPropagation();
+    e.preventDefault();
+    notes.deleteNote(notes.Id);
+    navigate("/");
   }
 
   return (
     <div className="container-fluid vh-100 bg-dark text-white p-0 section">
       {/* Header Section */}
-      <div className="row align-items-center p-3 border-bottom border-secondary">
+      <div className="row align-items-center p-3 border-bottom " style={{border:"2px solid white"}}>
         <div className="col-2 col-md-1 text-start">
           <Link to="/" className="text-white">
             <button
@@ -66,7 +69,7 @@ function View() {
       {/* Tag Section */}
       <div className="row p-3">
         <div className="col-12">
-          <h3 className="text-start" style={{ color: "grey" }}>
+          <h3 className="text-start" style={{ color: "white",wordWrap:"break-word" }}>
             #{note.tag}
           </h3>
         </div>
@@ -75,12 +78,12 @@ function View() {
       {/* Description Section */}
       <div className="row p-3 flex-grow-1">
         <div className="col-12">
-          <p
+          <pre
             className="text-white text-justify"
-            style={{ fontWeight: "bold", fontSize: "1.2rem" }}
+            style={{ fontWeight: "bold", fontSize: "1.2rem",wordWrap:"break-word",textWrap:"pretty" }}
           >
             {note.description}
-          </p>
+          </pre>
         </div>
       </div>
     </div>
