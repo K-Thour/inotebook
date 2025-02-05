@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router";
+import { Link } from "react-router";
 // import Alerts from "./Alerts";
 import NoteContext from "../context/notes/notecontext";
 function Login() {

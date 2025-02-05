@@ -1,5 +1,5 @@
-import React, { useContext, useEffect } from "react";
-import {  Routes, Route, useNavigate } from "react-router-dom";
+import React, { useContext } from "react";
+import {  Routes, Route } from "react-router-dom";
 import About from "./Components/About";
 import Navbar from "./Components/Navbar";
 import Register from "./Components/Register";
@@ -15,7 +15,6 @@ import Alert from "./Components/Alerts";
 import NotFound from "./Components/Notfound";
 function App() {
   let path=useContext(NoteContext);
-  const navigate=useNavigate();
   return (
     <div className="bg-dark">
     <LoadingBar height={3} color="yellow" progress={path.progress} onLoaderFinished={()=>path.setProgress(0)} />

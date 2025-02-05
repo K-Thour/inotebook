@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import NoteContext from "../context/notes/notecontext";
 import { useNavigate } from "react-router";
 function About() {
