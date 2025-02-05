@@ -20,7 +20,6 @@ router.post(
   // If there are errors, return Bad request and the errors
   async (req, res) => {
     let success = false;
-    console.log(req.body);
     const errors = validationResult(req);
     const salt = await bycrypt.genSalt(10);
     req.body.password = await bycrypt.hash(req.body.password, salt);
@@ -35,7 +34,6 @@ router.post(
 
       if (existingUser) {
         // If the user exists, send an error response
-        console.log({success,existingUser});
         return res.status(200).json({ success, message: "Email is already registered." });
       }
 
