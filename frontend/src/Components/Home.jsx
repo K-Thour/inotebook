@@ -4,7 +4,6 @@ import NoteContext from "../context/notes/notecontext";
 function Home() {
   let notes = useContext(NoteContext);
   const navigate=useNavigate();
-  console.log("hi");
   let handleClick = (e) => {
     notes.setId(e.currentTarget.id);
   };
