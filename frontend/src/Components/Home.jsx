@@ -4,6 +4,7 @@ import NoteContext from "../context/notes/notecontext";
 function Home() {
   let notes = useContext(NoteContext);
   const navigate=useNavigate();
+  console.log("hi");
   let handleClick = (e) => {
     notes.setId(e.currentTarget.id);
   };
@@ -21,6 +22,7 @@ function Home() {
     notes.setProgress(10);
     notes.getuser();
     notes.getNotes()
+    notes.Welcome();
     }
   },[notes.auth])
   return (

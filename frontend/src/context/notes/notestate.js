@@ -9,6 +9,7 @@ const NoteState = (props) => {
   const [alert, setAlert] = useState(null);
   const [auth, setAuth] = useState(false);
   const [note, setnote] = useState([ ]);
+  let called=false;
   const [user,setUser]=useState({
     name:"name",
     email:"email"
@@ -23,6 +24,14 @@ const NoteState = (props) => {
       }, 3000);
     }
   };
+  const Welcome=()=>{
+    if(!called){
+    setTimeout(()=>{
+      showAlert("success",`Welcome ${user.name}`);
+    },3000);
+    called=true;
+  }
+  }
   // function to register
 
   const register = async (name, email, password) => {
@@ -214,6 +223,7 @@ const NoteState = (props) => {
         register,
         getuser,
         user,
+        Welcome,
       }}
     >
       {props.children}
