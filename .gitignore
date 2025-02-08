@@ -1,5 +1,2 @@
-/frontend\node_modules
-/Backend\node_modules
-/frontend\.gitignore
-/Backend\.gitignore
-.gitignore
+/frontend/node_modules
+/Backend/node_modules

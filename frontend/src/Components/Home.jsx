@@ -23,6 +23,7 @@ function Home() {
     notes.getNotes()
     notes.Welcome();
     }
+    // eslint-disable-next-line
   },[notes.auth])
   return (
     <div
