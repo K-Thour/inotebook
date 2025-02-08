@@ -7,15 +7,14 @@ const NoteState = (props) => {
   const [Id, setId] = useState();
   const [progress, setProgress] = useState(0);
   const [alert, setAlert] = useState(null);
-  const [auth, setAuth] = useState(false);
   const [note, setnote] = useState([ ]);
-  let called=false;
+  const [called,setCalled]=useState(false);
   const [user,setUser]=useState({
     name:"name",
     email:"email"
   });
   let newuser;
-  const host = "http://localhost:4000";
+  const host = "http://192.168.29.178:4000";
   const showAlert = (type, message) => {
     setAlert({ type, message });
     if (type === "success") {
@@ -27,9 +26,9 @@ const NoteState = (props) => {
   const Welcome=()=>{
     if(!called){
     setTimeout(()=>{
-      showAlert("success",`Welcome ${user.name}`);
+      showAlert("success",`Welcome ${newuser.name}`);
     },3000);
-    called=true;
+    setCalled(true);
   }
   }
   // function to register
@@ -50,7 +49,8 @@ const NoteState = (props) => {
       const json = await response.json();
       if (json.success) {
         showAlert("success", "User registered successfully");
-        setAuth(json.authtoken);
+        // setAuth(json.authtoken);
+        localStorage.setItem("auth",json.authtoken);
         navigate("/");
       } else {
         showAlert("warning", json.message);
@@ -77,7 +77,8 @@ const NoteState = (props) => {
       }
       const json = await response.json();
       if (json.success) {
-        setAuth(json.authtoken);
+        // setAuth(json.authtoken);
+        localStorage.setItem("auth",json.authtoken);
         showAlert("success", "User Login successfully");
         navigate("/");
       } else {
@@ -96,7 +97,7 @@ const NoteState = (props) => {
         method: "post",
         headers: {
           "Content-Type": "application/json",
-          "auth-token": auth,
+          "auth-token": localStorage.getItem("auth"),
         },
       });
       if (!response.ok) {
@@ -121,7 +122,7 @@ const NoteState = (props) => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "auth-token": auth||"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNjc5Zjc0MmQ2YTdjOTYwYzUyODMxZDk1IiwiaWF0IjoxNzM4NTEzMjk0fQ.PmUMAz02MgxLedWTqpuA17SlfhYRx2XTG5_gKbJw3Zo",
+          "auth-token":localStorage.getItem("auth"),
         },
       });
       setProgress(50);
@@ -144,7 +145,7 @@ const NoteState = (props) => {
         method: "post",
         headers: {
           "Content-Type": "application/json",
-          "auth-token": auth,
+          "auth-token":localStorage.getItem("auth"),
         },
         body: JSON.stringify({ title, description, tag }),
       });
@@ -167,7 +168,7 @@ const NoteState = (props) => {
         method: "put",
         headers: {
           "Content-Type": "application/json",
-          "auth-token": auth,
+          "auth-token": localStorage.getItem("auth"),
         },
         body: JSON.stringify({ title, description, tag }),
       });
@@ -189,7 +190,7 @@ const NoteState = (props) => {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          "auth-token": auth,
+          "auth-token": localStorage.getItem("auth"),
         },
       });
       if (!response.ok) {
@@ -213,8 +214,6 @@ const NoteState = (props) => {
         addNote,
         updateNote,
         deleteNote,
-        auth,
-        setAuth,
         progress,
         setProgress,
         alert,
@@ -224,6 +223,7 @@ const NoteState = (props) => {
         getuser,
         user,
         Welcome,
+        setCalled
       }}
     >
       {props.children}

@@ -5,8 +5,9 @@ function About() {
   const data = useContext(NoteContext);
   const navigate=useNavigate();
   const handleLogout=()=>{
-    data.setAuth(false);
+    localStorage.removeItem("auth");
     navigate("/Login");
+    data.setCalled(false);
     data.showAlert("success","User Logout Successfully");
   }
   return (

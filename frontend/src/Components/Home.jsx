@@ -14,7 +14,7 @@ function Home() {
     navigate("/");
   }
   useEffect(()=>{
-    if(!notes.auth){
+    if(!localStorage.getItem("auth")){
       notes.showAlert("warning","Please Login");
       navigate("/login");
     }else{
@@ -33,10 +33,10 @@ function Home() {
         <div style={{ width: "95%" }}>
           <h3 className="text-center mt-3 text-white ms-5">Your Notes</h3>
         </div>
-        <div className="me-4" id="add" style={{ width: "5%",marginRight:"100px" }} onClick={handleClick}>
+        <div className="me-5" id="add" style={{ width: "10%",marginRight:"100px" }} onClick={handleClick}>
           <Link to="/add">
-            <button id="add" className="text-white me-5 mt-2" onClick={handleClick} style={{ background: "transparent", fontSize: "25px" ,width:"4vw",padding:"5px 10px 0 0"}}>
-              <ion-icon name="add-outline"></ion-icon>
+            <button id="add" className="text-white me-5 mt-2 bg-transparent display-6" onClick={handleClick} style={{minWidth:"80px",borderRadius:"25px",display:"flex",alignItems:"center",justifyContent:"center"}}>
+              <ion-icon name="add-outline" ></ion-icon>
             </button>
           </Link>
         </div>

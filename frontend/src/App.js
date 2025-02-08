@@ -17,7 +17,7 @@ function App() {
   let path=useContext(NoteContext);
   return (
     <div className="bg-dark">
-    <LoadingBar height={3} color="yellow" progress={path.progress} onLoaderFinished={()=>path.setProgress(0)} />
+    <LoadingBar height={3} color="red" progress={path.progress} onLoaderFinished={()=>path.setProgress(0)} />
     {path.location.pathname==="/"||path.location.pathname==="/about"?<Navbar/>:""}
       <Alert Alert={path.alert}/>
         <Routes>
