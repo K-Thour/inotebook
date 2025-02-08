@@ -14,7 +14,7 @@ const NoteState = (props) => {
     email:"email"
   });
   let newuser;
-  const host = "http://192.168.29.178:4000";
+  const host = "https://inotebook-8k35.onrender.com";
   const showAlert = (type, message) => {
     setAlert({ type, message });
     if (type === "success") {
