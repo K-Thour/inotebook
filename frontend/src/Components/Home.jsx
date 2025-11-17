@@ -1,54 +1,86 @@
 import React, { useContext, useEffect } from "react";
 import { Link, useNavigate, NavLink } from "react-router-dom";
 import NoteContext from "../context/notes/notecontext";
+
 function Home() {
   let notes = useContext(NoteContext);
-  const navigate=useNavigate();
+  const navigate = useNavigate();
+
   let handleClick = (e) => {
     notes.setId(e.currentTarget.id);
   };
-  const deleteNote=async(e)=>{
+
+  const deleteNote = async (e) => {
     e.stopPropagation();
     e.preventDefault();
     notes.deleteNote(e.target.id);
     navigate("/");
-  }
-  useEffect(()=>{
-    if(!localStorage.getItem("auth")){
-      notes.showAlert("warning","Please Login");
+  };
+
+  useEffect(() => {
+    if (!localStorage.getItem("auth")) {
+      notes.showAlert("warning", "Please Login");
       navigate("/login");
-    }else{
-    notes.setProgress(10);
-    notes.getuser();
-    notes.getNotes()
-    notes.Welcome();
+    } else {
+      notes.setProgress(10);
+      notes.getuser();
+      notes.getNotes();
+      notes.Welcome();
     }
     // eslint-disable-next-line
-  },[notes.auth])
+  }, [notes.auth]);
+
   return (
     <div
       className="d-flex flex-column section list"
-      style={{ minHeight:"100vh",height: "100%", width: "100vw", overflow: "hidden" }}
+      style={{
+        minHeight: "100vh",
+        height: "100%",
+        width: "100vw",
+        overflow: "hidden", // prevent double scroll
+      }}
     >
+      {/* HEADER */}
       <div className="d-flex flex-row vw-100 align-items-center">
         <div style={{ width: "95%" }}>
           <h3 className="text-center mt-3 text-white ms-5">Your Notes</h3>
         </div>
-        <div className="me-5" id="add" style={{ width: "10%",marginRight:"100px" }} onClick={handleClick}>
+
+        <div
+          className="me-5"
+          id="add"
+          style={{ width: "10%", marginRight: "100px" }}
+          onClick={handleClick}
+        >
           <Link to="/add">
-            <button id="add" className="text-white me-5 mt-2 bg-transparent display-6" onClick={handleClick} style={{minWidth:"80px",borderRadius:"25px",display:"flex",alignItems:"center",justifyContent:"center"}}>
-              <ion-icon name="add-outline" ></ion-icon>
+            <button
+              id="add"
+              className="text-white me-5 mt-2 bg-transparent display-6"
+              onClick={handleClick}
+              style={{
+                minWidth: "80px",
+                borderRadius: "25px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <ion-icon name="add-outline"></ion-icon>
             </button>
           </Link>
         </div>
       </div>
+
       <div
         className="row"
         style={{
           display: "flex",
           justifyContent: "space-around",
           flexWrap: "wrap",
-          height: "100%",
+          height: "calc(100vh - 120px)", 
+          overflowY: "auto",          
+          overflowX: "hidden",
+          paddingBottom: "20px",
         }}
       >
         {notes.note.map((note) => (
@@ -73,10 +105,14 @@ function Home() {
               >
                 <div className="d-flex justify-content-between ">
                   <div>
-                    <p className="card-text mt-2 ms-2 text-white tag overlap" style={{ color: "grey" }}>
+                    <p
+                      className="card-text mt-2 ms-2 text-white tag overlap"
+                      style={{ color: "grey" }}
+                    >
                       #{note.tag}
                     </p>
                   </div>
+
                   <div className="d-flex me-2">
                     <Link to="/update">
                       <button
@@ -90,8 +126,9 @@ function Home() {
                         <ion-icon name="pencil-outline"></ion-icon>
                       </button>
                     </Link>
+
                     <Link to="/">
-                    <button
+                      <button
                         className="mt-2 me-2 bg-danger"
                         style={{
                           height: "29px",
@@ -101,18 +138,24 @@ function Home() {
                         id={note._id}
                         onClick={deleteNote}
                       >
-            <ion-icon name="trash-outline" id={note._id} ></ion-icon>
-          </button>
-          </Link>
+                        <ion-icon name="trash-outline" id={note._id}></ion-icon>
+                      </button>
+                    </Link>
                   </div>
                 </div>
+
                 <div className="card-body d-flex flex-column justify-content-center mb-5">
                   <h1
                     className="card-title text-white overlap"
-                    style={{ textAlign: "center", textWrap: "wrap",height:"20%" }}
+                    style={{
+                      textAlign: "center",
+                      textWrap: "wrap",
+                      height: "20%",
+                    }}
                   >
                     {note.title}
                   </h1>
+
                   <pre
                     className="card-text mt-1 text-white overlap"
                     style={{
