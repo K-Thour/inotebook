@@ -6,7 +6,7 @@ function View() {
 
   // Find the note using `find` instead of `map`
   const note = notes.note.find((n) => n._id === notes.Id);
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   // Handle case where note is not found
   if (!note) {
     return (
@@ -18,24 +18,27 @@ function View() {
       </div>
     );
   }
-  const deleteNote=async(e)=>{
+  const deleteNote = async (e) => {
     e.stopPropagation();
     e.preventDefault();
     notes.deleteNote(notes.Id);
     navigate("/");
-  }
+  };
 
   return (
     <div className="container-fluid vh-100 bg-dark text-white p-0 section">
       {/* Header Section */}
-      <div className="row align-items-center p-3 border-bottom " style={{border:"2px solid white"}}>
+      <div
+        className="row align-items-center p-3 border-bottom "
+        style={{ border: "2px solid white" }}
+      >
         <div className="col-2 col-md-1 text-start">
           <Link to="/" className="text-white">
-            <button
-              className="btn btn-transparent p-0"
-              aria-label="Go back"
-            >
-              <ion-icon name="arrow-back-outline" style={{ fontSize: "25px" }}></ion-icon>
+            <button className="btn btn-transparent p-0" aria-label="Go back">
+              <ion-icon
+                name="arrow-back-outline"
+                style={{ fontSize: "25px" }}
+              ></ion-icon>
             </button>
           </Link>
         </div>
@@ -53,15 +56,15 @@ function View() {
             </button>
           </Link>
           <Link to="/">
-          <button
-            className="btn btn-danger"
-            style={{ fontSize: "22px",marginTop:"10px" }}
-            aria-label="Delete note"
-            id={note.id}
-            onClick={deleteNote}
-          >
-            <ion-icon name="trash-outline" id={note.id}></ion-icon>
-          </button>
+            <button
+              className="btn btn-danger"
+              style={{ fontSize: "22px", marginTop: "10px" }}
+              aria-label="Delete note"
+              id={note.id}
+              onClick={deleteNote}
+            >
+              <ion-icon name="trash-outline" id={note.id}></ion-icon>
+            </button>
           </Link>
         </div>
       </div>
@@ -69,18 +72,33 @@ function View() {
       {/* Tag Section */}
       <div className="row p-3">
         <div className="col-12">
-          <h3 className="text-start" style={{ color: "white",wordWrap:"break-word" }}>
+          <h3
+            className="text-start"
+            style={{ color: "white", wordWrap: "break-word" }}
+          >
             #{note.tag}
           </h3>
         </div>
       </div>
 
       {/* Description Section */}
-      <div className="row p-3 flex-grow-1">
+      <div
+        className="row p-3 flex-grow-1"
+        style={{
+          height: "calc(100vh - 220px)",
+          overflowY: "auto",
+          overflowX: "hidden",
+        }}
+      >
         <div className="col-12">
           <pre
             className="text-white text-justify"
-            style={{ fontWeight: "bold", fontSize: "1.2rem",wordWrap:"break-word",textWrap:"pretty" }}
+            style={{
+              fontWeight: "bold",
+              fontSize: "1.2rem",
+              wordWrap: "break-word",
+              textWrap: "pretty",
+            }}
           >
             {note.description}
           </pre>
